@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13.Update Hotel Details</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: url("https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    backdrop-filter: blur(30px);
+  }
+
+  .logo {
+    font-size: 2.5rem;
+    color: white;
+    user-select: none;
+    font-weight: 900;
+    margin-left: 20px;
+    animation: fadeIn 2s ease;
+  }
+
+  .logo-italic {
+    font-style: italic;
+    color: white;
+  }
+
+  .back-button {
+    font-size: 1.1em;
+    color: white;
+    background: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    margin-right: 20px;
+    text-decoration: none;
+    animation: slideInRight 1s ease;
+  }
+
+  .back-button:hover {
+    background: white;
+    color: black;
+    text-decoration: none;
+  }
+
+  .container {
+    padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 150%;
+            max-width: 600px;
+            margin: auto;
+            color: black;
+            margin-top: 110px;
+            position: relative;
+            background: transparent;
+            border: 2px solid white;
+            backdrop-filter: blur(20px);
+  }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    header {
+      flex-direction: column;
+      padding: 10px;
+    }
+    .container {
+      padding: 20px;
+      margin-top: 200px;
+      max-width: 95%;
+    }
+    .back-button {
+      margin-top: 10px;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: rgb(19, 194, 194);
+    border: 2px solid white;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span style="font-style: normal">Trip</span>
+    <span style="font-weight: normal; font-size: 2.5rem; font-style: italic">me</span>
+  </div>
+  <button class="back-button" onclick="history.back()">Back</button>
+</header>
+<div class="container">
+    <h1 style="text-align: center;">Update Hotel Details</h1>
+    {% if details %}
+      {% for hotel in details %}
+      <div class="hotel-details">
+        <form method="post">
+          <input type="hidden" name="hotel_id" value="{{ hotel[0] }}" />
+          
+          <label for="hotel_name">Hotel Name:</label>
+          <input type="text" id="hotel_name" name="hotel_name" value="{{ hotel[1] }}" placeholder="Enter hotel name" required />
+          
+          <label for="contact_number">Contact Number:</label>
+          <input type="tel" id="contact_number" name="contact_number" value="{{ hotel[3] }}" pattern="[0-9]{10,15}" placeholder="Enter contact number" required />
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="{{ hotel[4] }}" placeholder="Enter email address" required />
+          
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="address" value="{{ hotel[5] }}" placeholder="Enter address" required />
+          
+          <label for="timings">Timings:</label>
+          <input type="text" id="timings" name="timings" value="{{ hotel[6] }}" placeholder="Enter timings" required />
+          
+          <label for="total_rooms">Total Rooms:</label>
+          <input type="number" id="total_rooms" name="total_rooms" value="{{ hotel[7] }}" min="1" placeholder="Enter total rooms" required />
+          
+          <label for="room_cost">Room Cost:</label>
+          <input type="number" id="room_cost" name="room_cost" value="{{ hotel[8] }}" min="0" placeholder="Enter room cost" required />
+          
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" placeholder="Enter hotel description" required>{{ hotel[9] }}</textarea>
+          
+          <label for="rooms_availability">Rooms Availability:</label>
+          <input type="text" id="rooms_availability" name="rooms_availability" value="{{ hotel[11] }}" placeholder="Enter rooms availability" required />
+          
+          <label for="available_rooms">Number of Rooms Available:</label>
+          <input type="number" id="available_rooms" name="available_rooms" value="{{ hotel[12] }}" min="0" placeholder="Enter number of available rooms" required />
+          
+          <button type="submit">Update</button>
+        </form>
+      </div>
+      
+      {% endfor %}
+    {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12.Hotel Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+            user-select: none;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .logo-italic {
+            font-style: italic;
+            color: white;
+            
+        }
+
+        .back-button {
+            font-size: 1.1em;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            margin-top: 150px; /* Adjusted */
+            position: relative;
+            background: transparent;
+            border: 2px solid white;
+            backdrop-filter: blur(20px);
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .container{
+                margin-top: 200px;
+                padding: 20px;
+                max-width: auto;
+            }
+            .back-button {
+                margin-top: 10px;
+            }
+        }
+    
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: black;
+        }
+        .dashboard-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px 30px;
+            background-color: black;
+            color: white;
+            border-radius: 14px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .dashboard-link:hover {
+            background-color: rgb(19, 194, 194);
+            border: 2px solid white;
+        }
+
+        /* New Style for Logout Button */
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.1em;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background: Red;
+            color: white;
+            text-decoration: none;
+        }
+        .popup {
+            font-family: Arial, sans-serif;
+            width: 450px;
+            background-color: #EDFBD8;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px -3px #111;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            display: none; /* Initially hide popup */
+        }
+
+        .popup__icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            fill: #84D65A;
+        }
+
+        .popup__message {
+            font-weight: bold;
+            color: #393a37;
+            text-align: center; /* Center the message */
+            width: 100%;
+        }
+
+        .popup__close {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: auto;
+            fill: #2B641E;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="font-style: normal;">Trip</span><span style= "font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+        </div>
+        <!-- Logout Button Outside Container -->
+        <a href="{{url_for('hlogout')}}" class="logout-button">Logout</a>
+    </header>
+    <div class="container">
+        <h1>Hotel Dashboard</h1>
+        <!-- Removed Logout Button from here -->
+        <a href="{{url_for('createhotel')}}" class="dashboard-link">Create Hotel</a>
+        <a href="{{url_for('viewhotel_hotel')}}" class="dashboard-link">View Your Hotel Details</a>
+        <a href="{{url_for('viewbookings')}}" class="dashboard-link">View Bookings</a>
+    </div>
+
+    <div class="popup">
+        <div class="popup__icon">
+            <svg fill="#84D65A" height="20" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" fill="#84D65A" fill-rule="evenodd"/>
+            </svg>
+            </div>
+        <div class="popup__message">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <b>{{ message }}</b>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="popup__close" onclick="this.parentNode.style.display = 'none'">
+            <svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <path d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z" fill="#393a37"></path>
+            </svg>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var popup = document.querySelector('.popup');
+            var message = popup.querySelector('.popup__message');
+            // Check if there are messages to display
+            if (message.textContent.trim() !== "") {
+                popup.style.display = 'flex'; // Change display to 'flex' to show the popup
+            }
+        });
+    </script>
+</body>
+</html>    

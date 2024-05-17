@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore the Journey</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+            backdrop-filter: blur(20px);
+            transition: background-color 0.5s ease;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: #ffffff;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .back-button {
+            font-size: 1.1em;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            text-align: justify;
+            margin-top: 100px;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: slideInUp 1s ease;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .blog-item {
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .blog-item p {
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .blog-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .blog-content {
+            font-size: 1.4rem;
+        }
+
+        .blog-meta {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                padding: 10px;
+            }
+
+            .back-button {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span>Trip</span><span class="logo-italic">me</span>
+        </div>
+        <button class="back-button" onclick="history.back()">Back</button>
+    </header>
+    <div class="container">
+
+        <h4>Discover the Adventure</h4>
+        {% if b %}
+        {% for i in b %}
+        <div class="blog-item">
+            <p class="blog-title">{{i[1]}}</p>
+            <p class="blog-content">{{i[2]}}</p>
+            <p class="blog-meta">Uploaded time: {{i[3]}} | Author: {{i[4]}}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No blogs are added</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

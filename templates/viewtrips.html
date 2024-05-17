@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30.View Trips by Admin</title>
+    <style>
+      
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100%;
+            width:100%;
+            background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+            user-select: none;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .logo-italic {
+            font-style: italic;
+            color: white;
+            
+        }
+
+        .back-button {
+            font-size: 1.1em;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+            text-decoration: none;
+        }
+
+        .container {
+                      padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            margin-top: 150px; /* Adjusted */
+            position: relative;
+            background: transparent;
+            border: 2px solid white;
+            backdrop-filter: blur(20px);
+            color: black;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .back-button {
+                margin-top: 10px;
+            }
+        }
+        h5 {
+            margin-bottom: 10px;
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+        p {
+            margin-bottom: 10px;
+            font-weight:bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="font-style: normal;">Trip</span><span style= "font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+        </div>
+        <button class="back-button" onclick="history.back()">Back</button>
+    </header>
+    <div class="container">
+      
+        {% if detail %}
+            {% for i in detail %}
+            <a href="{{url_for('update_trips',package_id=i[0])}}"><button>Update</button></a>
+            <form method="post" action="{{ url_for('delete_trips', company_name=i[10]) }}">
+                <button type="submit">Delete</button>
+            </form>
+            
+
+                <h5>{{i[10]}}</h5>
+                <p>Package Name: {{i[2]}}</p>
+                <p>Description: {{i[3]}}</p>
+                <p>Price: {{i[4]}}</p>
+                <p>Start Date: {{i[5]}}</p>
+                <p>End Date: {{i[6]}}</p>
+                <p>Duration (days): {{i[7]}}</p>
+                <p>Includes Amenities: {{ i[8] }}</p>
+                <p>Excludes Amenities: {{ i[9] }}</p>
+            {% endfor %}
+        {% else %}
+            <p>No trip packages are added</p>
+        {% endif %}
+    </div>
+</body>
+</html>

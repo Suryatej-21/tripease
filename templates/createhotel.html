@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.Add Hotel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+            user-select: none;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .logo-italic {
+            font-style: italic;
+            color: white;
+        }
+
+        .back-button {
+            font-size: 1.1em;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            width: 6rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            margin-top: 100px;
+            width: 90%;
+            max-width: 1200px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: slideInUp 1s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .form {
+                padding: 20px;
+                margin-top: 200px;
+                max-width: 95%;
+            }
+            .back-button {
+                margin-top: 10px;
+            }
+        }
+
+        form {
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            color: black;
+            max-width: 400px;
+            margin: auto;
+            margin-top: 130px;
+            position: relative;
+            background: transparent;
+            border: 2px solid white;
+            backdrop-filter: blur(20px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 2rem;
+            width: 30%;
+        }
+
+        button:hover {
+            background-color: rgb(19, 194, 194);
+            border: 2px solid white;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: black;
+            text-decoration: none;
+            padding: 20px;
+        }
+
+        a:hover {
+            color: rgb(19, 194, 194);
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .cssbuttons-io-button {
+            display: flex;
+            align-items: center;
+            font-family: inherit;
+            font-weight: 500;
+            font-size: 17px;
+            padding: 0.8em 1.5em 0.8em 1.2em;
+            color: white;
+            width: 150px;
+            background-color: black;
+            background: linear-gradient(0deg, black 0%, black 100%);
+            border: none;
+            box-shadow: 0 0.7em 1.5em -0.5em rgb(184, 146, 255);
+            letter-spacing: 0.05em;
+            border-radius: 20em;
+            cursor: pointer;
+            margin-bottom: 20px; /* Added margin-bottom for spacing */
+        }
+
+        .cssbuttons-io-button svg {
+            margin-right: 8px;
+        }
+
+        .cssbuttons-io-button:hover {
+            box-shadow: 0 0.5em 1.5em -0.5em rgb(149, 91, 255);
+            background: linear-gradient(0deg, rgb(19, 194, 194) 0%, rgb(19, 194, 194) 100%);
+            border-radius: 2px solid white;
+        }
+
+        .cssbuttons-io-button:active {
+            box-shadow: 0 0.3em 1em -0.5em rgb(160, 109, 255);
+        }
+        #popup-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            max-width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .success {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            width: 320px;
+            padding: 12px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+            background: #EDFBD8;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px -3px #111;
+        }
+
+        .success__icon {
+            width: 20px;
+            height: 20px;
+            transform: translateY(-2px);
+            margin-right: 8px;
+        }
+
+        .success__icon path {
+            fill: #84D65A;
+        }
+
+        .success__title {
+            font-weight: 500;
+            font-size: 14px;
+            color: #2B641E;
+        }
+
+        .success__close {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .success__close path {
+            fill: #2B641E;
+        }
+  
+    
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span style="font-style: normal;">Trip</span><span style="font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+        </div>
+        <button class="back-button" href="{{ url_for('hotel_dashboard') }}" onclick="history.back()">Back</button>
+    </header>
+
+    <div id="popup-container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="success">
+                        <div class="success__icon">
+                            <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" fill="#393a37" fill-rule="evenodd"></path></svg>
+                        </div>
+                        <div class="success__title">{{ message }}</div>
+                        <div id="close-popup" class="success__close"><svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z" fill="#393a37"></path></svg></div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+   
+    <form action="#" method="POST" enctype="multipart/form-data">
+        <h1>Add New Hotel</h1>
+        <label for="hotel_name">Hotel Name:</label>
+        <input type="text" id="hotel_name" style="margin-bottom: 20px;" name="hotel_name" required>
+
+        <label for="hotel_picture">Hotel Picture:</label>
+        <input type="file" id="hotel_picture" style="margin-bottom: 20px;" name="hotel_picture">
+        <button type="button" class="cssbuttons-io-button" onclick="document.getElementById('room_images').click()">
+            <svg viewBox="0 0 640 512" fill="white" height="1em" xmlns="http://www.w3.org/2000/svg">
+                <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"></path>
+            </svg>
+            <span>Upload</span>
+        </button>
+
+        <label for="contact_number">Contact Number:</label>
+        <input type="text" id="contact_number" name="contact_number" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="address_details">Address Details:</label>
+        <textarea id="address_details" name="address_details" required></textarea>
+
+        <label for="opening_timings">Timings:</label>
+        <input type="text" id="opening_timings" name="timings" required>
+
+        <label for="total_rooms">Total Rooms:</label>
+        <input type="number" id="total_rooms" name="total_rooms" required>
+
+        <label for="room_cost">Room Cost:</label>
+        <input type="text" id="room_cost" name="room_cost" required>
+
+        <label for="hotel_description">Hotel Description:</label>
+        <textarea id="hotel_description" name="hotel_description"></textarea>
+
+        <label for="room_images">Room Images:</label>
+<input type="file" id="room_images" name="room_images">
+<button type="button" class="cssbuttons-io-button" onclick="document.getElementById('room_images').click()">
+    <svg viewBox="0 0 640 512" fill="white" height="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"></path>
+    </svg>
+    <span>Upload</span>
+</button>
+<label for="room_availability">Room Availability:</label>
+<select id="room_availability" name="room_availability" required>
+    <option value="available">Available</option>
+    <option value="not available">Not Available</option>
+</select>
+
+<label for="available_rooms">Available Rooms:</label>
+<input type="number" id="available_rooms" name="available_rooms" placeholder="If not available, enter 0" required>
+
+<label for="places">Enter the City Name:</label>
+
+{% if places %}
+<select id="place" name="place" required>
+    {% for i in places %}
+    <option value="{{i[1]}}">{{i[1]}}</option>
+    {% endfor %}
+</select>
+{% else %}
+<p>Here you can add a new place</p>
+{% endif %}
+
+<a href="{{ url_for('addnewplace') }}">If you want to add a new city..?</a>
+<div class="center">
+    <button type="submit">Submit</button>
+</div>
+</form>
+
+
+<script>
+    // Function to close the popup
+    function closePopup() {
+        document.getElementById('popup-container').style.display = 'none';
+    }
+
+    // Wait for the DOM content to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Close button event listener
+        document.getElementById('close-popup').addEventListener('click', closePopup);
+    });
+</script>
+
+
+</body>
+</html>

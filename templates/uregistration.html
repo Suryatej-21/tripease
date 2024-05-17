@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22.User Registration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        background: url("https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg")
+          no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+        backdrop-filter: blur(30px);
+      }
+      .logo {
+        font-size: 2.5rem;
+        color: white;
+        user-select: none;
+        font-weight: 900;
+        margin-left: 20px;
+        animation: fadeIn 2s ease;
+      }
+
+      .logo-italic {
+        font-style: italic;
+        color: white;
+      }
+
+      .back-button-one {
+        font-size: 1.1em;
+        color: white;
+        background: transparent;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+        margin-right: 20px;
+        text-decoration: none;
+        animation: slideInRight 1s ease;
+        width: auto;
+      }
+
+      .back-button-one:hover {
+        background: white;
+        color: black;
+        text-decoration: none;
+      }
+      .container {
+       
+        backdrop-filter: blur(30px);
+       background-color: rgba(255, 255, 255, 0.5);
+        margin: 100px auto;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: black;
+        padding: 3rem;
+      }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .back-button {
+                margin-top: 10px;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: black;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: black;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 2px solid black;
+            padding: 12px 0; /* Updated padding */
+        }
+
+        button:hover {
+            background-color: rgb(19, 194, 194);
+            border: 2px solid white;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .login-btn {
+            background-color: #333;
+            margin-left: 5px; /* Added margin */
+        }
+
+        .login-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span style="font-style: normal;">Trip</span><span style="font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+    </div>
+    <button class="back-button-one" onclick="history.back()">Back</button>
+</header>
+<div class="container">
+    <h1>User Registration Form</h1>
+    <form action="#" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your username"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email"><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required placeholder="Enter your phone number"><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address"><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password"><br>
+
+        <div class="btn-container">
+            <button type="submit">Register</button>
+            <button type="reset" class="login-btn">Reset</button>
+        </div>
+        
+    </form>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+</div>
+
+</body>
+</html>

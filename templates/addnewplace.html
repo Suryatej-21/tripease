@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.Add New Place</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+            user-select: none;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .back-button {
+            font-size: 1.1em;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+        }
+
+        main {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            margin-top: 150px;
+            width: 90%;
+            max-width: 500px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: slideInUp 1s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            
+            }
+            .main{
+                margin-top:150px;
+            }
+
+            .back-button {
+                margin-top: 10px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px; /* Add space below the label */
+            display: block; /* Ensure the label is on its own line */
+        }
+
+        .input-div {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0px 0px 100px black, inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+            animation: flicker 2s linear infinite;
+            margin-bottom: 10px; /* Add space below the input div */
+            margin-left: auto; /* Move the input div to the right */
+            margin-right: auto; /* Move the input div to the right */
+        }
+
+        .icon {
+            color: black;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: iconflicker 2s linear infinite;
+        }
+
+        .input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer !important;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: black;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 10px; /* Add space below the submit button */
+        }
+
+        button[type="submit"]:hover {
+            background-color: rgb(19, 194, 194);
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        @keyframes flicker {
+    0% {
+        border: 2px solid black; /* Change border color to black */
+        box-shadow: 0px 0px 100px black, inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    5% {
+        border: none;
+        box-shadow: none;
+    }
+    10% {
+        border: 2px solid white; /* Change border color to white */
+        box-shadow: 0px 0px 100px , inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    25% {
+        border: none;
+        box-shadow: none;
+    }
+    30% {
+        border: 2px solid black; /* Change border color to black */
+        box-shadow: 0px 0px 100px , inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    100% {
+        border: 2px solid black; /* Change border color to black */
+        box-shadow: 0px 0px 100px black, inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+}
+
+
+        @keyframes iconflicker {
+            0% {
+                opacity: 1;
+            }
+            5% {
+                opacity: 0.2;
+            }
+            10% {
+                opacity: 1;
+            }
+            25% {
+                opacity: 0.2;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        /* Adjust the border radius for the place input */
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 2px; /* Set border radius to 2px */
+    border: 1px solid #ccc;
+}
+
+/* Add space between the place input and the label for the image */
+label[for="place"] {
+    margin-top: 15px; /* Add space above the label */
+    margin-bottom: 5px; /* Add space below the label */
+    display: block; /* Ensure the label is on its own line */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="font-style: normal;">Trip</span><span style="font-weight: normal; font-style: italic;">me</span>
+        </div>
+        <button class="back-button" onclick="history.back()" aria-label="Go back to previous page">Back</button>
+    </header>
+
+    <main>
+        <h3>Add New Place</h3>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="place">Enter the place name:</label>
+            <input type="text" id="place" name="place" placeholder="Enter the city name only" required aria-label="Place name">
+
+            <label for="place">Enter the Image of that Place:</label>
+            <div class="input-div">
+                <input class="input" name="file" type="file">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon">
+                    <polyline points="16 16 12 12 8 16"></polyline>
+                    <line y2="21" x2="12" y1="12" x1="12"></line>
+                    <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                    <polyline points="16 16 12 12 8 16"></polyline>
+                </svg>
+            </div>
+            <button type="submit" aria-label="Submit new place">Submit</button>
+        </form>
+    </main>
+</body>
+</html>

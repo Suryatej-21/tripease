@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.Create Blogs</title>
+    <style>
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    backdrop-filter: blur(30px);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: white;
+    user-select: none;
+    font-weight: 900;
+    margin-left: 20px;
+    animation: fadeIn 2s ease;
+}
+
+.logo-italic {
+    font-style: italic;
+    color: white;
+    
+}
+
+.back-button {
+    font-size: 1.1em;
+    color: white;
+    background: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    margin-right: 20px;
+    text-decoration: none;
+    animation: slideInRight 1s ease;
+}
+
+.back-button:hover {
+    background: white;
+    color: black;
+    text-decoration: none;
+}
+
+
+.container {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin-top: 100px;
+    width: 80%;
+    max-width: 1100px;
+    backdrop-filter: blur(25px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: slideInUp 1s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .container {
+padding: 20px;
+margin-top: 200px;
+max-width: 10%;
+}
+    .back-button-one {
+        margin-top: 10px;
+    }
+}
+        .back-button-one {
+            background:transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            flex-direction:right;
+        }
+        .back-button-one:hover {
+            background-color:white;
+            color:black;
+            text-decoration: none;
+            border-radius: 2px solod white;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: calc(100% - 10px);
+            background-position-y: 50%;
+            padding-right: 30px;
+        }
+        button[type="submit"] {
+            justify-self: center;
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0 0 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: rgb(19, 194, 194);
+            border: 2px solid white;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="font-style: normal;">Trip</span><span style= "font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+        </div>
+        <button class="back-button-one" href="{{url_for('blogs_dashboard')}}" onclick="history.back()">Back</button>
+    </header>
+ 
+    <div class="container">
+        <h1>Create a New Blog</h1>
+        <form method="POST" action="#">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" required><br>
+
+            <label for="content">Content:</label><br>
+            <textarea id="content" name="content" rows="5" required></textarea><br>
+
+            <label for="place">Enter the city name only:</label><br>
+            {% if places %}
+                <select id="place" name="place" required>
+                    {% for i in places %}
+                        <option value="{{i[1]}}">{{i[1]}}</option>
+                    {% endfor %}
+                </select><br>
+            {% else %}
+                <span>Here you can add a new place</span>
+            {% endif %}
+
+            <a href="{{url_for('addnewplace_b')}}">Add new place</a><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</body>
+</html>

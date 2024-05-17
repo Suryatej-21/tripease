@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20.User Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide scroll bars */
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+            user-select: none;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .logo-italic {
+            font-style: italic;
+            color: white;
+        }
+
+        .back-button-one {
+            font-size: 0.8em; /* Adjusted font size */
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 8px 16px; /* Adjusted padding */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+            width: auto;
+        }
+
+        .back-button-one:hover {
+            background: white;
+            color: black;
+            text-decoration: none;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            backdrop-filter: blur(30px);
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 98px auto;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border:2px solid black;
+        }
+
+        button:hover {
+            background-color: rgb(19, 194, 194);
+            border:2px solid white;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            color: rgb(19, 194, 194);
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <span style="font-style: normal;">Trip</span><span style="font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+    </div>
+    <button class="back-button-one" onclick="history.back()">Back</button>
+</header>
+<div class="container">
+    <h1>User Login</h1>
+    <form method="POST" action="#">
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{{url_for('uregistration')}}">Don't have an account? Register here</a>
+    <a href="{{url_for('uforgot')}}">Forgot Password?</a>
+    {% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<center><b>{{ message }}</b></center>
+{% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+</body>
+</html>

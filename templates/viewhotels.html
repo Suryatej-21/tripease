@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27.View Hotel Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: white;
+            user-select: none;
+            font-weight: 900;
+            margin-left: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .logo-italic {
+            font-style: italic;
+            color: white;
+        }
+
+        .back-button {
+            font-size: 1.1em;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-right: 20px;
+            text-decoration: none;
+            animation: slideInRight 1s ease;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-top: 110px;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .i-details {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease; /* Animation for card appearance */
+        }
+
+        .i-details img {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: black;
+            border-color: white;
+            transition: all 0.3s ease;
+            animation: slideInRight 1s ease; /* Animation for button appearance */
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(19, 194, 194);
+            border-color: rgb(19, 194, 194);
+        }
+
+        hr {
+            width: 100%;
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .container{
+                padding: 20px;
+        margin-top: 200px;
+        max-width: 95%;
+            }
+            .back-button {
+                margin-top: 10px;
+            }
+        }
+
+        .searchBox {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: #2f3640;
+            border-radius: 50px;
+            position: relative;
+            margin: 2rem 4rem;
+        }
+
+        .searchButton {
+            color: white;
+            position: absolute;
+            right: 18px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+            border: 0;
+            display: inline-block;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        }
+
+        button:hover {
+            color: #fff;
+            background-color: rgb(19, 194, 194);
+            box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        .searchInput {
+            border: none;
+            background: none;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            padding: 25px 23px 25px 13px;
+        }
+
+        h1 {
+            color: black;
+        }
+        .card-wrapper {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.card-wrapper:hover {
+    transform: translateY(-10px); /* Adjust the value as needed */
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); /* Add box-shadow for a lifted effect */
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span style="font-style: normal;">Trip</span><span style="font-weight: normal; font-size: 2.5rem; font-style: italic;">me</span>
+        </div>
+
+        <button class="back-button" onclick="history.back()">Back</button>
+
+    </header>
+
+
+
+    <div class="container">
+        <!-- Searchbar Starts -->
+        <form method="post">
+            <div class="searchBox" style="text-align:center;">
+                <input class="searchInput" type="text" name="search_query" placeholder="Search By Location">
+                <button class="searchButton" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                        <g clip-path="url(#clip0_2_17)">
+                            <g filter="url(#filter0_d_2_17)">
+                                <path d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" shape-rendering="crispEdges"></path>
+                            </g>
+                        </g>
+                        <defs>
+                            <filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+                                <feOffset dy="4"></feOffset>
+                                <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                <feComposite in2="hardAlpha" operator="out"></feComposite>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17"></feBlend>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17" result="shape"></feBlend>
+                            </filter>
+                            <clipPath id="clip0_2_17">
+                                <rect width="28.0702" height="28.0702" fill="white" transform="translate(0.403503 0.526367)"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+            </div>
+        </form>
+        <!-- Searchbar Ends -->
+
+        <h1>List of hotels</h1>
+        {% if detail %}
+        {% for i in detail %}
+        <div class="i-details card-wrapper">
+            <h2>Hotel Name: {{ i[1] }}</h2>
+
+            <span>Contact Number: {{ i[3] }}</span><br>
+            <span>Email: {{ i[4] }}</span><br>
+            <span>Address: {{ i[5] }}</span><br>
+            <span>Timings: {{ i[6] }}</span><br>
+            <span>Total Rooms: {{ i[7] }}</span><br>
+            <span>Room Cost: ${{ i[8] }}</span><br>
+            <span>Description: {{ i[9] }}</span><br>
+            <span>Rooms Availability: {{ i[11] }}</span><br>
+            <span>Number of Rooms Available: {{ i[12] }}</span>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename=i[2]+'.jpg') }}" class="card-img-top" alt="Hotel Picture">
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename=i[10]+'.jpg') }}" class="card-img-top" alt="Room Picture">
+                </div>
+            </div>
+        </div>
+        <a href="{{url_for('booktohotel',hid=i[0])}}" class="btn btn-primary">Book this hotel</a>
+        <hr>
+        {% endfor %}
+        {% for i in p %}
+        <div class="i-details">
+             <h2>Place Name: {{ i[1] }}</h2>
+            <img src="{{ url_for('static', filename=i[2]+'.jpg') }}" class="card-img-top" alt="Place Picture">
+        </div>
+        <hr>
+        {% endfor %}
+        {% else %}
+        <p>You have not added any hotels.</p>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
+

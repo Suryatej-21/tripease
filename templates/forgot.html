@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        background: url("https://cdn.pixabay.com/photo/2022/08/31/13/05/sea-7423274_1280.jpg")
+          no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+        backdrop-filter: blur(30px);
+      }
+
+      .logo {
+        font-size: 2.5rem;
+        color: white;
+        user-select: none;
+        font-weight: 900;
+        margin-left: 20px;
+        animation: fadeIn 2s ease;
+      }
+
+      .logo-italic {
+        font-style: italic;
+        color: white;
+      }
+
+      .back-button {
+        font-size: 1.1em;
+        color: white;
+        background: transparent;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+        margin-right: 20px;
+        text-decoration: none;
+        animation: slideInRight 1s ease;
+      }
+
+      .back-button:hover {
+        background: white;
+        color: black;
+        text-decoration: none;
+      }
+
+      .container {
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        margin-top: 100px;
+        width: 90%;
+        max-width: 1200px;
+        backdrop-filter: blur(25px);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        animation: slideInUp 1s ease;
+      }
+
+      @keyframes slideInUp {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        header {
+          flex-direction: column;
+          padding: 10px;
+        }
+        .container {
+          padding: 20px;
+          margin-top: 200px;
+          max-width: 95%;
+        }
+        .back-button {
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <center><b>{{ message }}</b></center>
+  {% endfor %} {% endif %} {% endwith %}
+  <body>
+    <header>
+      <div class="logo">
+        <span style="font-style: normal">Trip</span
+        ><span
+          style="font-weight: normal; font-size: 2.5rem; font-style: italic"
+          >me</span
+        >
+      </div>
+      <button class="back-button" onclick="history.back()">Back</button>
+    </header>
+    <div class="container">
+      <form method="POST">
+        <h1>Forgot Password</h1>
+        <h5>Enter your username</h5>
+        <input
+          type="text"
+          name="id1"
+          placeholder="enter username"
+          required
+        /><br />
+        <button>Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
